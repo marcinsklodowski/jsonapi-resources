@@ -174,7 +174,8 @@ module JSONAPI
     # end
     # ```
     def _save
-      unless @model.valid?
+      validation_context = context[:validation_context]
+      unless @model.valid?(validation_context)
         fail JSONAPI::Exceptions::ValidationErrors.new(self)
       end
 
